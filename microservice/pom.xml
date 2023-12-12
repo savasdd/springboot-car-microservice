@@ -24,6 +24,7 @@
         <module>logs-service</module>
         <module>notification-service</module>
         <module>stock-service</module>
+        <module>location-service</module>
     </modules>
 
     <properties>
