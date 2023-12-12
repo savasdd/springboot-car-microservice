@@ -1,5 +1,16 @@
 server:
+  host: localhost
   port: 8085
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${server.host}:8761/eureka
+
 spring:
   application:
     name: gateway-service
+  banner:
+    location: banner.txt
+  config:
+    import: info.yml
