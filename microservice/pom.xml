@@ -23,6 +23,7 @@
         <module>grpc-service</module>
         <module>logs-service</module>
         <module>notification-service</module>
+        <module>stock-service</module>
     </modules>
 
     <properties>
