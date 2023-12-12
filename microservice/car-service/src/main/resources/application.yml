@@ -15,7 +15,6 @@ spring:
     hibernate.ddl-auto: update
     defer-datasource-initialization: true
     properties:
-#      hibernate.dialect: com.food.dialect.PostgresSQL94JsonDialect
       hibernate.enable_lazy_load_no_trans: true
       hibernate.format_sql: true
   data:
