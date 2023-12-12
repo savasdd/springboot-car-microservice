@@ -1,5 +1,11 @@
 server:
+  host: localhost
   port: 8086
+
 spring:
   application:
     name: log-service
+  banner:
+    location: banner.txt
+  config:
+    import: eureka.yml,info.yml

@@ -1,5 +1,11 @@
 server:
+  host: localhost
   port: 8087
+
 spring:
   application:
     name: stock-service
+  banner:
+    location: banner.txt
+  config:
+    import: eureka.yml,info.yml

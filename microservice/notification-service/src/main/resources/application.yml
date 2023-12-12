@@ -1,5 +1,11 @@
 server:
+  host: localhost
   port: 8089
+
 spring:
   application:
     name: notification-service
+  banner:
+    location: banner.txt
+  config:
+    import: eureka.yml,info.yml

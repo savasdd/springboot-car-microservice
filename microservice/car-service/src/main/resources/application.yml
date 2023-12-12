@@ -2,15 +2,10 @@ server:
   host: localhost
   port: 8081
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://${server.host}:8761/eureka
-
 spring:
   application:
     name: car-service
   banner:
     location: banner.txt
   config:
-    import: info.yml
+    import: eureka.yml,info.yml
