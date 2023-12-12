@@ -21,6 +21,7 @@
         <module>discovery-server</module>
         <module>api-gateway</module>
         <module>grpc-service</module>
+        <module>logs-service</module>
     </modules>
 
     <properties>
