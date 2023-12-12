@@ -9,5 +9,5 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 class CarApplication
 
 fun main(args: Array<String>) {
-  runApplication<CarApplication>(*args)
+    runApplication<CarApplication>(*args)
 }
