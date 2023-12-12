@@ -25,6 +25,7 @@
         <module>notification-service</module>
         <module>stock-service</module>
         <module>location-service</module>
+        <module>car-service</module>
     </modules>
 
     <properties>
@@ -33,10 +34,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
