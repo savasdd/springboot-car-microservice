@@ -1,4 +1,4 @@
-package com.car.entity
+package com.car.entity.base
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
