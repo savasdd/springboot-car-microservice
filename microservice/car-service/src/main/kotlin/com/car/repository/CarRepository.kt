@@ -1,6 +1,7 @@
 package com.car.repository
 
-import com.car.entity.City
+import com.car.entity.Car
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface CityRepository : JpaRepository<City, Long> {}
+interface CarRepository : JpaRepository<Car, Long> {
+}
