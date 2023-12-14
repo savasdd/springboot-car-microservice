@@ -1,5 +1,6 @@
 package com.car.service.impl
 
+import com.car.dto.ResponseData
 import com.car.entity.Town
 import com.car.repository.CityRepository
 import com.car.repository.TownRepository
@@ -15,10 +16,10 @@ class TownServiceImpl(
 ) : TownService {
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    override fun getAll(): List<Town> {
+    override fun getAll(): ResponseData<Town> {
         val list = repository.findAll();
         log.info("get all town {} ", list.size)
-        return list
+        return ResponseData(items = list, totalCount = list.size)
     }
 
     override fun getOne(id: Long): Town {

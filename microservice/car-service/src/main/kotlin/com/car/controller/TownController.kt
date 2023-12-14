@@ -1,5 +1,6 @@
 package com.car.controller
 
+import com.car.dto.ResponseData
 import com.car.entity.Town
 import com.car.service.TownService
 import org.springframework.http.HttpStatus
@@ -20,7 +21,7 @@ class TownController(
 ) {
 
     @GetMapping(value = ["/getAll"])
-    fun getAllTown(): ResponseEntity<List<Town>> {
+    fun getAllTown(): ResponseEntity<ResponseData<Town>> {
         return ResponseEntity.ok(service.getAll())
     }
 
