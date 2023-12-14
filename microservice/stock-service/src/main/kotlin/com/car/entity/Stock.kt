@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
+import org.hibernate.annotations.Where
 import java.util.Date
 
 @Getter
@@ -19,6 +20,7 @@ import java.util.Date
 @NoArgsConstructor
 @Entity
 @Table(name = "Stock")
+@Where(clause = "is_deleted = 0")
 data class Stock(
     var name: String? = null,
     var availableItems: Int? = 0,

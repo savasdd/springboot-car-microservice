@@ -1,8 +1,8 @@
 package com.car.controller
 
 import com.car.dto.ResponseData
-import com.car.entity.Stock
-import com.car.service.StockService
+import com.car.entity.StockProduct
+import com.car.service.StockProductService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -15,33 +15,33 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/stocks")
-class StockController(
-    private val service: StockService,
-    ) {
+@RequestMapping("/api/stocks/product")
+class StockProductController(
+    private val service: StockProductService,
+) {
 
     @GetMapping(value = ["/getAll"])
-    fun getAllStock(): ResponseEntity<ResponseData<Stock>> {
+    fun getAllStockProduct(): ResponseEntity<ResponseData<StockProduct>> {
         return ResponseEntity.ok(service.getAll())
     }
 
     @GetMapping(value = ["/getOne/{id}"])
-    fun getOneStock(@PathVariable id: Long): ResponseEntity<Stock> {
+    fun getOneStockProduct(@PathVariable id: Long): ResponseEntity<StockProduct> {
         return ResponseEntity.ok(service.getOne(id))
     }
 
     @PostMapping(value = ["/save"])
-    fun createStock(@RequestBody dto: Stock): ResponseEntity<Stock> {
+    fun createStockProduct(@RequestBody dto: StockProduct): ResponseEntity<StockProduct> {
         return ResponseEntity(service.create(dto), HttpStatus.CREATED)
     }
 
     @PutMapping(value = ["/update/{id}"])
-    fun updateStock(@PathVariable id: Long, @RequestBody dto: Stock): ResponseEntity<Stock> {
+    fun updateStockProduct(@PathVariable id: Long, @RequestBody dto: StockProduct): ResponseEntity<StockProduct> {
         return ResponseEntity.ok(service.update(id, dto))
     }
 
     @DeleteMapping(value = ["/delete/{id}"])
-    fun deleteStock(@PathVariable id: Long): ResponseEntity<Stock> {
+    fun deleteStockProduct(@PathVariable id: Long): ResponseEntity<StockProduct> {
         service.delete(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

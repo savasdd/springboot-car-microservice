@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
+import org.hibernate.annotations.Where
 import java.math.BigDecimal
 import java.util.*
 import kotlin.jvm.Transient
@@ -17,6 +18,7 @@ import kotlin.jvm.Transient
 @NoArgsConstructor
 @Entity
 @Table(name = "Car")
+@Where(clause = "is_deleted = 0")
 data class Car(
 
     var brand: String? = null,

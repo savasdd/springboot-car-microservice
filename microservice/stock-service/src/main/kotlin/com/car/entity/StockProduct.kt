@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
+import org.hibernate.annotations.Where
 
 @Getter
 @Setter
@@ -16,11 +17,12 @@ import lombok.Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "StockProduct")
+@Where(clause = "is_deleted = 0")
 data class StockProduct(
-    val carId: Long? = null,
-    val description: String? = null,
+    var carId: Long? = null,
+    var description: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    val stock: Stock? = null
+    var stock: Stock? = null
 
 ) : BaseEntity() {}

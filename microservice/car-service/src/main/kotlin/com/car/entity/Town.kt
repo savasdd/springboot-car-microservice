@@ -3,6 +3,7 @@ package com.car.entity
 import com.car.entity.base.BaseEntity
 import jakarta.persistence.*
 import lombok.*
+import org.hibernate.annotations.Where
 
 @Getter
 @Setter
@@ -11,6 +12,7 @@ import lombok.*
 @NoArgsConstructor
 @Entity
 @Table(name = "Town")
+@Where(clause = "is_deleted = 0")
 data class Town(
     @Column(name = "name")
     var name: String? = null,
