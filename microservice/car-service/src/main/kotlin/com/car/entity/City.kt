@@ -10,13 +10,12 @@ import lombok.*
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "City")
-class City : BaseEntity() {
-
+data class City(
     @Column(name = "name")
-    var name: String? = null
-
+    var name: String? = null,
     @Column(name = "code", unique = true)
     var code: String? = null
-}
+) : BaseEntity() {}

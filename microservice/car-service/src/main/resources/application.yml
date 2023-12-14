@@ -22,6 +22,9 @@ spring:
     jpa:
       repositories:
         enabled: true
+  sql:
+    init:
+      mode: never
   datasource:
     url: jdbc:mysql://${server.host}:3306/${server.db}
     username: root

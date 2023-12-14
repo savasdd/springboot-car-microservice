@@ -11,15 +11,15 @@ import lombok.*
 @NoArgsConstructor
 @Entity
 @Table(name = "Town")
-class Town : BaseEntity() {
-
+data class Town(
     @Column(name = "name")
-    var name: String? = null
+    var name: String? = null,
 
     @Column(name = "code")
-    var code: String? = null
+    var code: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     var city: City? = null
-}
+
+) : BaseEntity() {}
