@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.food.grpc.stock;
+import "google/protobuf/wrappers.proto";
+
+
+service StockService {
+  rpc getStock(StockRequest) returns (StockResponse);
+}
+
+message StockRequest {
+  int64 carId = 1;
+}
+
+message StockResponse {
+  int64 stockId = 1;
+  int64 availableItems = 2;
+  int64 status = 3;
+}
