@@ -36,3 +36,7 @@ spring:
       connection-timeout: 60000
       pool-name: carConnectionPool
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+grpc:
+  server:
+    port: 9090

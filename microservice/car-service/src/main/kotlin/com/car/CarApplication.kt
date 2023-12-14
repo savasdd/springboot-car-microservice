@@ -11,7 +11,7 @@ import org.springframework.core.io.ClassPathResource
 @SpringBootApplication
 @EnableDiscoveryClient
 class CarApplication(
-    val service: CityService
+    private val service: CityService
 ) : CommandLineRunner {
     override fun run(vararg args: String?) {
         saveAllCity(service)
