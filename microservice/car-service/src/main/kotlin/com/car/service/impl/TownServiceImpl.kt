@@ -3,6 +3,7 @@ package com.car.service.impl
 import com.car.dto.ResponseData
 import com.car.entity.Town
 import com.car.exception.GeneralException
+import com.car.exception.GeneralWarning
 import com.car.repository.CityRepository
 import com.car.repository.TownRepository
 import com.car.service.TownService
@@ -17,7 +18,7 @@ class TownServiceImpl(
 ) : TownService {
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    @Throws(GeneralException::class)
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun getAll(): ResponseData<Town> {
         val list = repository.findAll();
         log.info("get all town {} ", list.size)
