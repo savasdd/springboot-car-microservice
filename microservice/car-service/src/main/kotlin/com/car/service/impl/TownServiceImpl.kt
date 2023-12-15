@@ -2,6 +2,7 @@ package com.car.service.impl
 
 import com.car.dto.ResponseData
 import com.car.entity.Town
+import com.car.exception.GeneralException
 import com.car.repository.CityRepository
 import com.car.repository.TownRepository
 import com.car.service.TownService
@@ -16,16 +17,19 @@ class TownServiceImpl(
 ) : TownService {
     private val log = LoggerFactory.getLogger(this::class.java)
 
+    @Throws(GeneralException::class)
     override fun getAll(): ResponseData<Town> {
         val list = repository.findAll();
         log.info("get all town {} ", list.size)
         return ResponseData(items = list, totalCount = list.size)
     }
 
+    @Throws(GeneralException::class)
     override fun getOne(id: Long): Town {
         return repository.findById(id).orElseThrow { NotFoundException("Not found!") }
     }
 
+    @Throws(GeneralException::class)
     override fun create(dto: Town): Town {
         if (dto.city == null)
             throw Exception("City is required!")
@@ -39,6 +43,7 @@ class TownServiceImpl(
         return model
     }
 
+    @Throws(GeneralException::class)
     override fun update(id: Long, dto: Town): Town {
         val city = dto.city?.id?.let { cityRepository.findById(it) }
         val towns = repository.findById(id)
@@ -55,6 +60,7 @@ class TownServiceImpl(
         return model
     }
 
+    @Throws(GeneralException::class)
     override fun delete(id: Long) {
         if (repository.existsById(id))
             repository.deleteById(id)

@@ -2,6 +2,7 @@ package com.car.service.impl
 
 import com.car.dto.ResponseData
 import com.car.entity.Car
+import com.car.exception.GeneralException
 import com.car.repository.CarRepository
 import com.car.repository.CityRepository
 import com.car.repository.TownRepository
@@ -18,6 +19,8 @@ class CarServiceImpl(
 
 ) : CarService {
     private val log = LoggerFactory.getLogger(this::class.java)
+
+    @Throws(GeneralException::class)
     override fun getAll(): ResponseData<Car> {
         val list = repository.findAll()
         log.info("get all car")
@@ -25,10 +28,12 @@ class CarServiceImpl(
         return ResponseData(items = list, totalCount = list.size)
     }
 
+    @Throws(GeneralException::class)
     override fun getOne(id: Long): Car {
         return repository.findById(id).orElseThrow { NotFoundException("Not Found!") }
     }
 
+    @Throws(GeneralException::class)
     override fun save(dto: Car): Car {
         val city = dto.city?.id?.let { cityRepository.findById(it) }
         val town = dto.town?.id?.let { townRepository.findById(it) }
@@ -41,6 +46,7 @@ class CarServiceImpl(
         return model
     }
 
+    @Throws(GeneralException::class)
     override fun update(id: Long, dto: Car): Car {
         val cars = repository.findById(id)
         val city = dto.city?.id?.let { cityRepository.findById(it) }
@@ -77,6 +83,7 @@ class CarServiceImpl(
         return model
     }
 
+    @Throws(GeneralException::class)
     override fun delete(id: Long) {
         if (repository.existsById(id))
             repository.deleteById(id)
