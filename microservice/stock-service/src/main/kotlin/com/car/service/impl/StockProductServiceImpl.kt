@@ -2,6 +2,8 @@ package com.car.service.impl
 
 import com.car.dto.ResponseData
 import com.car.entity.StockProduct
+import com.car.exception.GeneralException
+import com.car.exception.GeneralWarning
 import com.car.repository.StockProductRepository
 import com.car.repository.StockRepository
 import com.car.service.StockProductService
@@ -16,6 +18,8 @@ class StockProductServiceImpl(
 
 ) : StockProductService {
     private val log = LoggerFactory.getLogger(this::class.java)
+
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun getAll(): ResponseData<StockProduct> {
         val list = repository.findAll()
         log.info("get all StockProduct")
@@ -23,10 +27,12 @@ class StockProductServiceImpl(
         return ResponseData(items = list, totalCount = list.size)
     }
 
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun getOne(id: Long): StockProduct {
         return repository.findById(id).orElseThrow { NotFoundException("Not Found!") }
     }
 
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun create(dto: StockProduct): StockProduct {
         val stock = dto.stock?.id?.let { stockRepository.findById(it) }
         dto.version = 0L
@@ -37,6 +43,7 @@ class StockProductServiceImpl(
         return module
     }
 
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun update(id: Long, dto: StockProduct): StockProduct {
         val stock = dto.stock?.id?.let { stockRepository.findById(it) }
         val stocks = repository.findById(id)
@@ -53,6 +60,7 @@ class StockProductServiceImpl(
         return model
     }
 
+    @Throws(GeneralException::class, GeneralWarning::class)
     override fun delete(id: Long) {
         if (repository.existsById(id))
             repository.deleteById(id)
