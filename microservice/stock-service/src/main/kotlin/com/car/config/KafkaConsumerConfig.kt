@@ -4,6 +4,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.streams.StreamsConfig
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,14 +15,16 @@ import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import java.util.*
 
-@EnableKafka
 @Configuration
+@EnableKafka
 @ConditionalOnProperty(value = ["kafka.enabled"], havingValue = "true")
 class KafkaConsumerConfig {
     private var bootstrapAddress: String? = null
     private val GROUP_ID: String? = "stock_kafka"
 
-    fun KafkaConsumerConfig(env: Environment) {
+
+    @Autowired
+    fun  KafkaConsumerConfig(env: Environment) {
         bootstrapAddress = env.getProperty("spring.kafka.bootstrap-servers")
     }
 

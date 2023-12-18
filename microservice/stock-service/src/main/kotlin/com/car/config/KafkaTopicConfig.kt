@@ -2,6 +2,7 @@ package com.car.config
 
 import org.apache.kafka.clients.admin.AdminClientConfig
 import org.apache.kafka.clients.admin.NewTopic
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -16,6 +17,7 @@ class KafkaTopicConfig {
 
     private var bootstrapAddress: String? = null
 
+    @Autowired
     fun KafkaTopicConfig(env: Environment) {
         bootstrapAddress = env.getProperty("spring.kafka.bootstrap-servers")
     }
