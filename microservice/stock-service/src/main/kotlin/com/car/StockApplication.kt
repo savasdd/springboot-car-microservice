@@ -17,14 +17,16 @@ import org.springframework.scheduling.annotation.EnableAsync
 @EnableAsync
 class StockApplication
 
-@Autowired
-private val service: StockKafkaService? = null
 private val log = LoggerFactory.getLogger(StockApplication::class.java)
+
 
 fun main(args: Array<String>) {
     runApplication<StockApplication>(*args)
 }
 
+
+@Autowired
+private val service: StockKafkaService? = null
 
 @KafkaListener(id = "orders", topics = ["stock"], groupId = "stock_kafka")
 fun onEvent(order: String?) {
