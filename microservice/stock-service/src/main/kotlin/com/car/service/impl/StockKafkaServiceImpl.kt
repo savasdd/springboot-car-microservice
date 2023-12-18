@@ -6,6 +6,7 @@ import com.car.repository.StockProductRepository
 import com.car.service.StockKafkaService
 import com.car.utils.JsonUtil
 import org.slf4j.LoggerFactory
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 import org.webjars.NotFoundException
 import java.util.*
@@ -14,7 +15,7 @@ import java.util.*
 @Service
 class StockKafkaServiceImpl(
     private val repository: StockProductRepository,
-//    private val template: KafkaTemplate<String, String>
+    private val template: KafkaTemplate<String, String>
 
 ) : StockKafkaService {
     private val log = LoggerFactory.getLogger(this::class.java)
@@ -25,7 +26,7 @@ class StockKafkaServiceImpl(
         event.message = "ürün eklendi"
         val json: String = JsonUtil.toJson(event)
 
-//        template.send(TOPIC, event.id.toString(), json)
+        template.send(TOPIC, event.id.toString(), json)
         log.info("Sent: {}", event)
         return event
     }
@@ -74,7 +75,7 @@ class StockKafkaServiceImpl(
         val json = JsonUtil.toJson(event)
 
         repository.save(product)
-//        template.send(TOPIC_NOTIFICATION, event?.id.toString(), json)
+        template.send(TOPIC_NOTIFICATION, event?.id.toString(), json)
         log.info("Sent: {}", event)
     }
 }
