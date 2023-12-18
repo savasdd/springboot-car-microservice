@@ -9,7 +9,7 @@ spring:
   banner:
     location: banner.txt
   config:
-    import: eureka.yml,info.yml
+    import: eureka.yml,info.yml,kafka.yml
   jpa:
     show-sql: false
     hibernate.ddl-auto: update

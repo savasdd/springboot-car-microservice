@@ -19,6 +19,7 @@ import org.hibernate.annotations.Where
 @Table(name = "StockProduct")
 @Where(clause = "is_deleted = 0")
 data class StockProduct(
+    var name: String? = null,
     var carId: Long? = null,
     var description: String? = null,
 
