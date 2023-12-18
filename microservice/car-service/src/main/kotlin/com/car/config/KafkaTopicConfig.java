@@ -30,20 +30,5 @@ public class KafkaTopicConfig {
         return new KafkaAdmin(configs);
     }
 
-    @Bean
-    public NewTopic orders() {
-        return TopicBuilder.name("order")
-                .partitions(3)
-                .compact()
-                .build();
-    }
-
-    @Bean
-    public NewTopic stockTopic() {
-        return TopicBuilder.name("stock")
-                .partitions(3)
-                .compact()
-                .build();
-    }
 
 }
