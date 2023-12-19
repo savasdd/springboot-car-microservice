@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=postgis
-      - POSTGRES_DB=food_postgis_db
+      - POSTGRES_DB=postgis_db
       - POSTGRES_USER=postgis
     ports:
       - '5433:5432'

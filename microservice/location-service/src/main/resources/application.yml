@@ -1,7 +1,7 @@
 server:
   host: localhost
   port: 8088
-  db: car_postgis_db
+  db: postgis_db
 
 spring:
   application:

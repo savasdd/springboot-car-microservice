@@ -2,8 +2,8 @@ package com.car.service.impl
 
 import com.car.enums.EStockType
 import com.car.event.StockEvent
-import com.car.repository.StockProductRepository
-import com.car.service.StockKafkaService
+import com.car.repository.CarRepository
+import com.car.service.StockService
 import com.car.utils.JsonUtil
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
@@ -13,17 +13,21 @@ import java.util.*
 
 
 @Service
-class StockKafkaServiceImpl(
-    private val repository: StockProductRepository,
+class StockServiceImpl(
+    private val repository: CarRepository,
     private val template: KafkaTemplate<String, String>
 
-) : StockKafkaService {
+) : StockService {
     private val log = LoggerFactory.getLogger(this::class.java)
     private val topic = "stock"
     private val topicNotification = "stock_notification"
     override fun create(event: StockEvent): StockEvent {
+        val car = event.carId?.let { repository.findById(it).orElseThrow { NotFoundException("Car Not Found!") } }
+
         event.id = UUID.randomUUID().toString()
-        event.message = "ürün eklendi"
+        event.carId = car?.id
+        event.carName = car?.model
+        event.message = car?.brand + ", " + car?.model + " eklendi"
         val json: String = JsonUtil.toJson(event)
 
         template.send(topic, event.id.toString(), json)
@@ -51,31 +55,4 @@ class StockKafkaServiceImpl(
         return order
     }
 
-    override fun confirmStock(event: StockEvent?) {
-        val product = repository.findByCarIdAndStock_Id(event?.carId, event?.stockId)
-            .orElseThrow { NotFoundException("Product not fund!") }
-        log.info("Found: {}", event?.carId)
-
-        when (event?.status) {
-            EStockType.CONFIRMED -> {
-                event.status = EStockType.ACCEPT
-                product.stock?.stockType = EStockType.ACCEPT
-            }
-
-            EStockType.ROLLBACK -> {
-                event.status = EStockType.ROLLBACK
-                product.stock?.stockType = EStockType.ROLLBACK
-            }
-
-            else -> log.error("product not found")
-        }
-
-        event?.carName = product.name
-        event?.message = "ürün stoktan düşürüldü"
-        val json = JsonUtil.toJson(event)
-
-        repository.save(product)
-        template.send(topicNotification, event?.id.toString(), json)
-        log.info("Sent: {}", event)
-    }
 }
