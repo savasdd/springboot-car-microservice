@@ -54,10 +54,10 @@ class StockKafkaServiceImpl(
     override fun confirmStock(event: StockEvent?) {
         val product = repository.findByCarIdAndStock_Id(event?.carId, event?.stockId)
             .orElseThrow { NotFoundException("Product not fund!") }
-        log.info("Found: {}", event?.carId)
+        log.info("Found: {}", event?.carName)
 
         when (event?.status) {
-            EStockType.CONFIRMED -> {
+            EStockType.ACCEPT -> {
                 event.status = EStockType.ACCEPT
                 product.stock?.stockType = EStockType.ACCEPT
             }
