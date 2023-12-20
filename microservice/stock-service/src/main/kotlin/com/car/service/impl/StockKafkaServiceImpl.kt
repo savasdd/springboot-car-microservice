@@ -5,6 +5,7 @@ import com.car.event.StockEvent
 import com.car.repository.StockProductRepository
 import com.car.service.StockKafkaService
 import com.car.utils.JsonUtil
+import org.apache.commons.lang3.event.EventUtils
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service

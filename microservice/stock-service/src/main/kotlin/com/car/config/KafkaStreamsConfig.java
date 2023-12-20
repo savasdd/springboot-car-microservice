@@ -67,41 +67,4 @@ public class KafkaStreamsConfig {
         service.confirmStock(event);
     }
 
-
-    //TODO
-//    @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
-//    public KafkaStreamsConfiguration kStreamsConfigs() {
-//        Map<String, Object> props = new HashMap<>();
-//        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "stock_kafka");
-//        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-//        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.Integer().getClass().getName());
-//        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-//        props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, WallclockTimestampExtractor.class.getName());
-//        return new KafkaStreamsConfiguration(props);
-//    }
-//
-//    @Bean
-//    public StreamsBuilderFactoryBeanConfigurer configurer() {
-//        return fb -> fb.setStateListener((newState, oldState) -> {
-//            System.out.println("State transition from " + oldState + " to " + newState);
-//        });
-//    }
-//
-//    @Bean
-//    public KStream<Long, String> kStream(StreamsBuilder kStreamBuilder) {
-//        KStream<Long, String> stream = kStreamBuilder.stream("stock");
-//        stream
-//                .mapValues((ValueMapper<String, String>) String::toUpperCase)
-//                .groupByKey()
-//                .windowedBy(TimeWindows.of(Duration.ofMillis(1_000)))
-//                .reduce((String value1, String value2) -> value1 + value2, Named.as("windowStore"))
-//                .toStream()
-//                .map((windowedId, value) -> new KeyValue<>(windowedId.key(), value))
-//                .filter((i, s) -> s.length() > 40).to("streamingTopic2");
-//
-//        stream.print(Printed.toSysOut());
-//
-//        return stream;
-//    }
-
 }
